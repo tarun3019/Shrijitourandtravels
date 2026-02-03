@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SHRI JI TOUR AND TRAVELS</title>
+<style>
+  body {font-family: Arial, sans-serif; margin:0; background:#f9f9f9;}
+  header {background:#004aad; color:white; padding:10px; position:sticky; top:0; z-index:100;}
+  header marquee {font-weight:bold;}
+  .container {padding:20px; display:flex; flex-wrap:wrap; justify-content:center; gap:20px;}
+  .card {background:white; border-radius:10px; width:280px; padding:20px; box-shadow:0 4px 8px rgba(0,0,0,0.2); cursor:pointer; transition:0.3s;}
+  .card:hover {box-shadow:0 8px 16px rgba(0,0,0,0.3);}
+  .card h3 {margin-top:0;}
+  .modal {display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); overflow:auto; padding:50px 20px;}
+  .modal-content {background:white; margin:auto; padding:20px; border-radius:10px; max-width:900px; position:relative;}
+  .close {position:absolute; top:10px; right:20px; font-size:25px; cursor:pointer; color:red;}
+  h2 {color:#004aad;}
+  table {width:100%; border-collapse: collapse; margin-bottom:20px;}
+  th, td {border:1px solid #ddd; padding:8px; text-align:center;}
+  th {background:#004aad; color:white;}
+  @media(max-width:600px){.container{flex-direction:column;align-items:center;}}
+</style>
+</head>
+<body>
+
+<header>
+  <marquee behavior="scroll" direction="left">
+    Call: 7417650413 | WhatsApp: 7895031972 | Book Now | Char Dham | Do Dham | Teen Dham | Ek Dham Kedarnath | Ek Dham Badrinath | Gangotri
+  </marquee>
+</header>
+
+<div class="container">
+  <div class="card" onclick="openModal('charDham')">
+    <h3>Char Dham</h3>
+    <p>Starting Rate: ₹23,500 (Min 4 Pax)</p>
+  </div>
+  <div class="card" onclick="openModal('doDham')">
+    <h3>Do Dham</h3>
+    <p>Starting Rate: ₹16,500 (Min 4 Pax)</p>
+  </div>
+  <div class="card" onclick="openModal('teenDham')">
+    <h3>Teen Dham</h3>
+    <p>Starting Rate: ₹19,500 (Min 4 Pax)</p>
+  </div>
+  <div class="card" onclick="openModal('ekDhamKedarnath')">
+    <h3>Ek Dham – Kedarnath</h3>
+    <p>Starting Rate: ₹12,000 (Min 4 Pax)</p>
+  </div>
+  <div class="card" onclick="openModal('ekDhamBadrinath')">
+    <h3>Ek Dham – Badrinath</h3>
+    <p>Starting Rate: ₹9,000 (Min 4 Pax)</p>
+  </div>
+  <div class="card" onclick="openModal('gangotri')">
+    <h3>Gangotri Yatra</h3>
+    <p>3 Days / 2 Nights</p>
+  </div>
+</div>
+
+<!-- Modal -->
+<div id="modal" class="modal">
+  <div class="modal-content" id="modalContent">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<script>
+const packageData = {
+  charDham: {
+    title:"Char Dham Yatra – 10 Days",
+    itinerary:`Day 1: Haridwar → Barkot | Stay: Barkot | Meals: Dinner
+Day 2: Barkot → Yamunotri & back | Stay: Barkot | Meals: Breakfast & Dinner
+Day 3: Barkot → Uttarkashi | Stay: Uttarkashi | Meals: Breakfast & Dinner
+Day 4: Uttarkashi → Gangotri & back | Stay: Uttarkashi | Meals: Breakfast & Dinner
+Day 5: Uttarkashi → Rampur / Phata / Sitapur | Stay: Rampur / Phata / Sitapur | Meals: Breakfast & Dinner
+Day 6: Rampur / Phata / Sitapur → Kedarnath | Stay: Rampur / Phata / Sitapur (Kedarnath night stay NOT included) | Meals: Breakfast only
+Day 7: Kedarnath → Rampur / Phata / Sitapur | Meals: Breakfast & Dinner
+Day 8: Rampur / Phata / Sitapur → Badrinath / Pipal Koti | Meals: Breakfast & Dinner
+Day 9: Badrinath temple & sightseeing | Meals: Breakfast & Dinner
+Day 10: Badrinath / Pipal Koti → Haridwar | Meals: Breakfast`,
+    rates:`2 Pax Dzire – ₹36,000
+3 Pax Dzire – ₹27,000
+4 Pax Dzire – ₹23,500
+5 Pax Innova / Ertiga / Kia – ₹26,500
+6 Pax Innova / Ertiga – ₹23,500
+7 Pax Innova – ₹22,500
+8 Pax 2 Dzire – ₹23,500
+9 Pax Tempo Traveller – ₹24,000
+10 Pax Tempo Traveller – ₹23,000
+11 Pax Tempo Traveller – ₹22,000
+12 Pax Tempo Traveller – ₹21,500
+13 Pax Tempo Traveller (13 Seater) – ₹21,500
+14 Pax Tempo Traveller – ₹22,500
+15 Pax Tempo Traveller (17 Seater) – ₹21,500
+16 Pax Tempo Traveller – ₹21,000
+17 Pax Tempo Traveller – ₹20,500`,
+    terms:`Terms & Conditions:
+- Room Sharing: 2 / 3 / 4 / 6 Bed
+- Booking Advance: 15% mandatory
+- AC of vehicle not operated unless requested separately
+- Helicopter, horse, palki/doli NOT included
+- Kedarnath night stay & meals NOT included
+- Full T&C included in package info`
+  },
+  doDham: {
+    title:"Do Dham Yatra – 6 Days",
+    itinerary:`Day 1: Haridwar → Rampur / Phata / Sitapur | Meals: Dinner
+Day 2: Kedarnath Darshan | Meals: Breakfast only
+Day 3: Kedarnath → Rampur / Phata / Sitapur | Meals: Breakfast & Dinner
+Day 4: Rampur / Phata / Sitapur → Badrinath / Pipal Koti | Meals: Breakfast & Dinner
+Day 5: Badrinath temple & sightseeing | Meals: Breakfast & Dinner
+Day 6: Badrinath / Pipal Koti → Haridwar | Meals: Breakfast`,
+    rates:`2 Pax Dzire – ₹22,500
+3 Pax Dzire – ₹18,500
+4 Pax Dzire – ₹16,500
+5 Pax Innova / Ertiga / Kia – ₹17,000
+6 Pax Innova / Ertiga – ₹16,500
+7 Pax Innova – ₹16,500
+8 Pax Dzire / Tempo – ₹16,500
+9 Pax Tempo Traveller (12 Seater) – ₹17,500
+10 Pax Tempo Traveller – ₹16,500
+11 Pax Tempo Traveller – ₹14,750
+12 Pax Tempo Traveller – ₹14,000
+13 Pax Tempo Traveller – ₹14,000
+14 Pax Tempo Traveller (17 Seater) – ₹15,500
+15 Pax Tempo Traveller – ₹14,750
+16 Pax Tempo Traveller – ₹14,000
+17 Pax Tempo Traveller (17 Seater) – ₹13,500`,
+    terms:"Same as Char Dham"
+  },
+  teenDham: {
+    title:"Teen Dham Yatra – 8 Days",
+    itinerary:`Day 1: Haridwar → Uttarkashi | Meals: Dinner
+Day 2: Uttarkashi → Gangotri & back | Meals: Breakfast & Dinner
+Day 3: Uttarkashi → Rampur / Phata / Sitapur | Meals: Breakfast & Dinner
+Day 4: Rampur / Phata / Sitapur → Kedarnath | Meals: Breakfast only (Kedarnath night stay NOT included)
+Day 5: Kedarnath → Rampur / Phata / Sitapur | Meals: Breakfast & Dinner
+Day 6: Rampur / Phata / Sitapur → Badrinath / Pipal Koti | Meals: Breakfast & Dinner
+Day 7: Badrinath temple & sightseeing | Meals: Breakfast & Dinner
+Day 8: Badrinath / Pipal Koti → Haridwar | Meals: Breakfast`,
+    rates:`2 Pax Dzire – ₹30,500
+3 Pax Dzire – ₹23,000
+4 Pax Dzire – ₹19,500
+5 Pax Innova / Ertiga / Kia – ₹22,500
+6 Pax Innova / Ertiga – ₹19,500
+7 Pax Innova – ₹19,500
+8 Pax 2 Dzire – ₹20,000
+9 Pax Tempo Traveller – ₹19,500
+10 Pax Tempo Traveller – ₹19,500
+11 Pax Tempo Traveller – ₹19,500
+12 Pax Tempo Traveller – ₹19,500
+13 Pax Tempo Traveller (13 Seater) – ₹19,000
+15 Pax Tempo Traveller (17 Seater) – ₹18,000
+16 Pax Tempo Traveller – ₹17,500
+17 Pax Tempo Traveller – ₹17,000`,
+    terms:"Same as Char Dham"
+  },
+  ekDhamKedarnath: {
+    title:"Ek Dham – Kedarnath (4 Days / 3 Nights)",
+    itinerary:`Day 1: Haridwar → Rampur / Phata / Sitapur | Meals: Dinner
+Day 2: Kedarnath Darshan | Meals: Breakfast only | Stay: Rampur / Phata / Sitapur
+Day 3: Kedarnath → Rampur / Phata / Sitapur | Meals: Breakfast & Dinner
+Day 4: Rampur / Phata / Sitapur → Haridwar | Meals: Breakfast`,
+    rates:`2 Pax Dzire – ₹18,000
+3 Pax Dzire – ₹14,000
+4 Pax Dzire – ₹12,000
+5 Pax Innova / Ertiga / Kia – ₹13,000
+6 Pax Innova / Ertiga – ₹12,000
+7 Pax Innova – ₹12,000
+8 Pax Tempo – ₹12,000
+9 Pax Tempo Traveller – ₹12,500
+10 Pax Tempo Traveller – ₹11,500
+11 Pax Tempo Traveller – ₹11,000
+12 Pax Tempo Traveller – ₹10,500
+13 Pax Tempo Traveller – ₹11,000
+14 Pax Tempo Traveller (17 Seater) – ₹10,500
+15 Pax Tempo Traveller – ₹10,000
+16 Pax Tempo Traveller – ₹9,500
+17 Pax Tempo Traveller – ₹9,000`,
+    terms:"Same as Char Dham"
+  },
+  ekDhamBadrinath: {
+    title:"Ek Dham – Badrinath (3 Days / 2 Nights)",
+    itinerary:`Day 1: Haridwar → Badrinath / Pipal Koti | Meals: Dinner
+Day 2: Badrinath Darshan & sightseeing | Meals: Breakfast & Dinner
+Day 3: Badrinath / Pipal Koti → Haridwar | Meals: Breakfast`,
+    rates:`2 Pax Dzire – ₹12,500
+3 Pax Dzire – ₹10,000
+4 Pax Dzire – ₹9,000
+5 Pax Innova / Ertiga / Kia – ₹9,500
+6 Pax Innova / Ertiga – ₹10,000
+7 Pax Innova – ₹10,500
+8 Pax 2 Dzire – ₹11,000
+9 Pax Tempo – ₹10,000
+10 Pax Tempo Traveller – ₹10,500
+11 Pax Tempo Traveller – ₹11,000
+12 Pax Tempo Traveller – ₹11,500
+13 Pax Tempo Traveller – ₹12,000
+14 Pax Tempo Traveller – ₹12,500
+15 Pax Tempo Traveller – ₹13,000
+16 Pax Tempo Traveller – ₹13,500
+17 Pax Tempo Traveller (17 Seater) – ₹14,000`,
+    terms:"Same as Char Dham"
+  },
+  gangotri: {
+    title:"Gangotri Yatra – 3 Days",
+    itinerary:`Day 1: Haridwar → Uttarkashi | Meals: Dinner
+Day 2: Uttarkashi → Gangotri & back | Meals: Breakfast & Dinner
+Day 3: Uttarkashi → Haridwar | Meals: Breakfast`,
+    rates:"N/A",
+    terms:"Same as Char Dham"
+  }
+};
+
+function openModal(packageName){
+  const data = packageData[packageName];
+  document.getElementById("modalBody").innerHTML = `<h2>${data.title}</h2>
+  <h3>Itinerary:</h3><pre>${data.itinerary}</pre>
+  <h3>Rates:</h3><pre>${data.rates}</pre>
+  <h3>Terms & Conditions:</h3><pre>${data.terms}</pre>`;
+  document.getElementById("modal").style.display="block";
+}
+function closeModal(){document.getElementById("modal").style.display="none";}
+</script>
+
+</body>
+</html>
